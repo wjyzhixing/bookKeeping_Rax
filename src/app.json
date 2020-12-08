@@ -1,0 +1,31 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "source": "pages/Home/index"
+    },
+    {
+      "path":"/login",
+      "source": "pages/Login/index"
+    },
+    {
+      "path":"/register",
+      "source": "pages/Register/index"
+    },
+    {
+      "path":"/mainAction",
+      "source": "pages/MainAction/index"
+    },
+    {
+      "path":"/addPage",
+      "source": "pages/AddPage/index"
+    },
+    {
+      "path":"/editPage",
+      "source": "pages/EditPage/index"
+    }
+  ],
+  "window": {
+    "title": "Rax App"
+  }
+}

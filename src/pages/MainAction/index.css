@@ -1,0 +1,33 @@
+.rax-demo-home {
+  align-items: center;
+  margin-top: 100rpx;
+}
+
+.rax-demo-title {
+  font-size: 45rpx;
+  font-weight: bold;
+  margin: 20rpx 0;
+}
+
+.rax-demo-info {
+  font-size: 36rpx;
+  margin: 8rpx 0;
+  color: #555;
+}
+
+.rax-demo-username {
+  font-size: 36rpx;
+  display: inline-block;
+}
+
+.rax-demo-username span {
+  display: inline;
+}
+
+.rax-btn-list {
+  width: 90%;
+}
+
+.rax-btn {
+  display: inline;
+}
