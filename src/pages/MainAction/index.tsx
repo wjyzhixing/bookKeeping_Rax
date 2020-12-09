@@ -6,7 +6,7 @@ import { history } from 'rax-app';
 import cookie from 'react-cookies';
 // import { getSearchParams } from 'rax-app';
 // import axios from 'axios';
-import { Button, List, Message, Avatar, Icon, Dialog } from '@alifd/meet';
+import { Button, List, Message, Avatar, Icon, Dialog, Select } from '@alifd/meet';
 
 import './index.css';
 
@@ -16,6 +16,8 @@ export default function MainAction(props) {
   const [listContent, setListContent] = useState<any>([]);
   const [itemValue, setItemValue] = useState({});
   // const searchParams = getSearchParams();
+
+  const optionList = ['男', '女', ''];
 
   const getInitialInfo = () => {
     fetch('http://localhost:7001/mainContent', {
@@ -126,8 +128,21 @@ export default function MainAction(props) {
       </View>
       <Text className="rax-demo-info">Please check your bill</Text>
       <View className="rax-demo-username">
-        <Text>支出</Text> <Text style={{ color: 'blue', marginRight: '50rpx' }}>{reduceValue(listContent)}</Text>
-        <Text>收入</Text> <Text style={{ color: 'blue' }}>{addValue(listContent)}</Text>
+        <Text>支出</Text> <Text style={{ color: 'blue', marginRight: '20rpx' }}>{reduceValue(listContent)}</Text>
+        <Text>收入</Text> <Text style={{ color: 'blue', marginRight: '20rpx' }}>{addValue(listContent)}</Text>
+        <Text>结余</Text> <Text style={{ color: 'blue' }}>{addValue(listContent) - reduceValue(listContent)}</Text>
+      </View>
+      <View>
+        <Select
+          onChange={(v) => {
+            console.log(v);
+          }}
+        >
+          {/* {()} */}
+          <Select.Option value={1}>option 1</Select.Option>
+          <Select.Option value={2}>option 2</Select.Option>
+          <Select.Option value={3}>option 3</Select.Option>
+        </Select>
       </View>
       <View className="rax-btn-list">
         <List>
