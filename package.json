@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@alifd/meet": "^2.1.0",
+    "@alife/bizcharts-mobile": "^0.2.0",
     "axios": "^0.21.0",
     "rax": "^1.1.0",
     "rax-document": "^0.1.0",

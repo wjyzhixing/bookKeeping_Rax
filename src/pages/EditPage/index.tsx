@@ -5,7 +5,7 @@ import Text from 'rax-text';
 import { history } from 'rax-app';
 import { getSearchParams } from 'rax-app';
 import { Form, Radio, Input, Message } from '@alifd/meet';
-
+import { host } from '@/utils/const';
 import cookie from 'react-cookies';
 
 import './index.css';
@@ -26,7 +26,7 @@ export default function EditPage() {
     };
     console.log(param);
     if (errors === null) {
-      fetch('http://localhost:7001/editContent', {
+      fetch(`${host}editContent`, {
         method: 'POST',
         body: JSON.stringify(param),
         headers: new Headers({

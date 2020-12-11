@@ -4,14 +4,14 @@ import View from 'rax-view';
 import Text from 'rax-text';
 import { history } from 'rax-app';
 import { Form, Radio, Input, Message } from '@alifd/meet';
-
+import { host } from '@/utils/const';
 import './index.css';
 import Logo from '../../components/Logo';
 
 export default function Register() {
   const handleSubmit = (values: any, errors: null) => {
     if (errors === null) {
-      fetch('http://localhost:7001/register', {
+      fetch(`${host}register`, {
         method: 'POST',
         body: JSON.stringify(values),
         headers: new Headers({

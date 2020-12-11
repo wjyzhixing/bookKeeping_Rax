@@ -6,6 +6,7 @@ import { history } from 'rax-app';
 import cookie from 'react-cookies';
 // import { getSearchParams } from 'rax-app';
 // import axios from 'axios';
+import { host } from '@/utils/const';
 import { Button, List, Message, Avatar, Icon, Dialog, Select } from '@alifd/meet';
 
 import './index.css';
@@ -20,7 +21,7 @@ export default function MainAction(props) {
   const optionList = ['男', '女', ''];
 
   const getInitialInfo = () => {
-    fetch('http://localhost:7001/mainContent', {
+    fetch(`${host}mainContent`, {
       method: 'POST',
       // credentials: 'include',
       body: JSON.stringify({
@@ -47,7 +48,7 @@ export default function MainAction(props) {
   };
 
   const delInfo = (item) => {
-    fetch('http://localhost:7001/delContent', {
+    fetch(`${host}delContent`, {
       method: 'POST',
       // credentials: 'include',
       body: JSON.stringify({
@@ -118,6 +119,34 @@ export default function MainAction(props) {
     history.push(`/`);
   };
 
+  const selectSingle = (v) => {
+    fetch(`${host}selectSingle`, {
+      method: 'POST',
+      // credentials: 'include',
+      body: JSON.stringify({
+        userName: cookie.loadAll().username,
+        sex: v,
+      }),
+      headers: new Headers({
+        Authorization: `Bearer ${cookie.loadAll().Authorization}`,
+        'Content-Type': 'application/json',
+      }),
+    })
+      .then((response) => {
+        if (response.status == 401) {
+          Message.show({
+            type: 'warning',
+            title: 'You are not authorized.',
+          });
+        }
+        return response.json();
+      })
+      .then(function (myJson) {
+        console.log(myJson);
+        setListContent(myJson.result);
+      });
+  };
+
   console.log(listContent);
   return (
     <View className="rax-demo-home">
@@ -133,15 +162,11 @@ export default function MainAction(props) {
         <Text>结余</Text> <Text style={{ color: 'blue' }}>{addValue(listContent) - reduceValue(listContent)}</Text>
       </View>
       <View>
-        <Select
-          onChange={(v) => {
-            console.log(v);
-          }}
-        >
+        <Select onChange={(v) => selectSingle(v)}>
           {/* {()} */}
-          <Select.Option value={1}>option 1</Select.Option>
-          <Select.Option value={2}>option 2</Select.Option>
-          <Select.Option value={3}>option 3</Select.Option>
+          <Select.Option value={'男'}>Male Spend</Select.Option>
+          <Select.Option value={'女'}>Female Spend</Select.Option>
+          <Select.Option value={''}>All Spend</Select.Option>
         </Select>
       </View>
       <View className="rax-btn-list">
@@ -160,7 +185,7 @@ export default function MainAction(props) {
         </List>
       </View>
       <View className="rax-btn">
-        <Button type="primary" onClick={() => history.push(`/addPage`)} style={{ marginRight: '30rpx' }}>
+        <Button type="primary" onClick={() => history.push(`/addPage`)} style={{ marginRight: '20rpx' }}>
           增加账单
         </Button>
         <Button
@@ -168,8 +193,17 @@ export default function MainAction(props) {
           onClick={() => {
             returnLogin();
           }}
+          style={{ marginRight: '20rpx' }}
         >
           返回登录
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            history.push(`/showStatus`);
+          }}
+        >
+          消费总览
         </Button>
       </View>
       <Dialog

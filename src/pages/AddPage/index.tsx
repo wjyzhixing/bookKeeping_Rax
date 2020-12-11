@@ -4,7 +4,7 @@ import View from 'rax-view';
 import Text from 'rax-text';
 import { history } from 'rax-app';
 import { Form, Radio, Input, Message } from '@alifd/meet';
-
+import { host } from '@/utils/const';
 import cookie from 'react-cookies';
 
 import './index.css';
@@ -22,7 +22,7 @@ export default function AddPage() {
     };
     console.log(param);
     if (errors === null) {
-      fetch('http://localhost:7001/addContent', {
+      fetch(`${host}addContent`, {
         method: 'POST',
         body: JSON.stringify(param),
         headers: new Headers({

@@ -4,7 +4,7 @@ import View from 'rax-view';
 import Text from 'rax-text';
 import { history } from 'rax-app';
 import { Form, Radio, Input, Message } from '@alifd/meet';
-
+import { host } from '@/utils/const';
 import cookie from 'react-cookies';
 
 import './index.css';
@@ -16,7 +16,7 @@ export default function Login() {
   const handleSubmit = (values, errors) => {
     if (errors === null) {
       setUserDetail(values);
-      fetch('http://localhost:7001/login', {
+      fetch(`${host}login`, {
         method: 'POST',
         body: JSON.stringify(values),
         headers: new Headers({
